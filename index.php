@@ -12,6 +12,7 @@
             <div class="container-fluid">
                 <h1>La boite à Lambert</h1>
                 <p>Et ça fait peur aux chiens.</p>
+                <a onclick="random()" type="button" aria-pressed="true" class="btn btn-danger btn-lg active btn-block">Random</a>
             </div>
         </div>
         <div class="container-fluid">
@@ -27,7 +28,7 @@
                     $id = md5($file);
                     echo "<div class=\"col\">\n";
                     echo "<audio id=\"$id\" src=\"$file\" preload=\"none\"></audio>\n";
-                    echo "<a href=\"#$id\" onclick=\"document.getElementById('$id').play();\" type=\"button\" aria-pressed=\"true\" class=\"btn btn-".$color[$i%(count($color)-1)]." btn-lg active btn-block\">\n";
+                    echo "<a href=\"#$id\" onclick=\"document.getElementById('$id').play();\" type=\"button\" aria-pressed=\"true\" class=\"btn btn-".$color[$i%(count($color))]." btn-lg active btn-block\">\n";
                     echo substr($file, 0, strlen($file)-4);
                     echo "</a>\n";
                     echo "</div>\n";
@@ -40,5 +41,12 @@
     <script>
      var url = window.location.hash.substr(1);
      if(url) document.getElementById(url).play();
+
+     function random() {
+         var files = document.getElementsByTagName("audio");
+         var random = files[Math.floor(Math.random()*files.length)];
+         location.href = "#"+random.id;
+         random.play();
+     }
     </script>
 </html>
