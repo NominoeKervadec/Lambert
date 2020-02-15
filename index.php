@@ -19,8 +19,9 @@
             <div class="row mt-4">
                 <?php
                 $i = 0;
+                $to_replace = array("_" => " ", "-" => " ", "sounds/" => "", ".mp3" => "");
                 $color = array("primary", "secondary", "success", "danger", "warning", "info", "light", "dark");
-                foreach(glob("*.mp3") as $file) {
+                foreach(glob("sounds/*.mp3") as $file) {
                     if($i % 4 == 0 && $i != 0){
                         echo "</div>\n";
                         echo "<div class=\"row mt-4\">\n";
@@ -29,7 +30,11 @@
                     echo "<div class=\"col\">\n";
                     echo "<audio id=\"$id\" src=\"$file\" preload=\"none\"></audio>\n";
                     echo "<a href=\"#$id\" onclick=\"document.getElementById('$id').play();\" type=\"button\" aria-pressed=\"true\" class=\"btn btn-".$color[$i%(count($color))]." btn-lg active btn-block\">\n";
-                    echo substr($file, 0, strlen($file)-4);
+                    $title = $file;
+                    foreach($to_replace as $key => $value) {
+                        $title = str_replace($key, $value, $title);
+                    }
+                    echo $title;
                     echo "</a>\n";
                     echo "</div>\n";
                     $i = $i+1;

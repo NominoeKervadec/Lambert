@@ -1,2 +1,2 @@
 * Instruction
-Copy some .mp3 into the project root.
+Copy some .mp3 into the directory sounds/
